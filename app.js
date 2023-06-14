@@ -1,12 +1,22 @@
+// IMPORTACIONES
 const express = require("express");
-const path = require("path")
+const helmet = require("helmet");
+const morgan = require("morgan"); 
+const cors = require("cors");
+
+// INICIALIZAR LA LIBRERIA EXPRESS
+
 const app = express();
+const port = process.env.PORT || 3000;
 
-app.get("/", (req, res)=>{
-    res.sendFile(path.join(__dirname + "/index.html"))
-});
+// MIDDLEWARES
 
-app.listen(4000, ()=>{
-    console.log("hello word!  I DO MY FIRST SERVER",4000);
+app.use(helmet());
+app.use(cors());
+app.use(morgan ("dev"));
+
+//EJECUCION
+
+app.listen(port, ()=> {
+    console.log(` mi primer servidor es http:/localhost:${port}`);
 });
-//utilizo este puerto por que el 6000 no esta disponible
